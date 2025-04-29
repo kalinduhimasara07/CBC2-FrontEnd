@@ -4,6 +4,8 @@ const key = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 
 const url = `https://biopyihfouuryzhiholm.supabase.co`;
 
+const supabase = createClient(url, key);
+
 export default function uploadMediaToSupabase(file) {
   return new Promise((resolve, reject) => {
     if (file == null) {
@@ -15,8 +17,6 @@ export default function uploadMediaToSupabase(file) {
       alert("Please select a jpg or png file");
       return;
     }
-
-    const supabase = createClient(url, key);
 
     const timeStamp = new Date().getTime();
     fileName = file.name + timeStamp + "." + fileExtention;
