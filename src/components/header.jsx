@@ -17,7 +17,7 @@ export default function Header() {
             Home
           </Link>
           <Link
-            to="/priducts"
+            to="/products"
             className="text-accent font-bold text-xl hover:underline"
           >
             Products

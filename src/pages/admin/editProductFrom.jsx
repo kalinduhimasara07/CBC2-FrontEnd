@@ -31,14 +31,14 @@ export default function EditProductForm() {
 
     const promiseArray = [];
 
-    let imgurl = product.images
+    let imgurl = product.images;
 
     if (imagefiles.length > 0) {
       for (let i = 0; i < imagefiles.length; i++) {
         promiseArray[i] = uploadMediaToSupabase(imagefiles[i]);
       }
 
-    imgurl = await Promise.all(promiseArray);
+      imgurl = await Promise.all(promiseArray);
     }
 
     const productData = {
@@ -54,11 +54,15 @@ export default function EditProductForm() {
 
     const token = localStorage.getItem("token");
     try {
-      await axios.put(import.meta.env.VITE_BACKEND_URL + "/product/"+product.productId, productData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.put(
+        import.meta.env.VITE_BACKEND_URL + "/api/product/" + product.productId,
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       navigate("/admin/product");
       toast.success("Product Updated successfully");
     } catch (error) {

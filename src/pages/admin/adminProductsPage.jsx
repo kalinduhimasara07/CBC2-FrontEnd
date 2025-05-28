@@ -10,11 +10,13 @@ export default function AdminProductsPage() {
 
   useEffect(() => {
     if (!productsLoaded) {
-      axios.get(import.meta.env.VITE_BACKEND_URL + "/product").then((res) => {
-        console.log(res.data);
-        setProducts(res.data);
-        setProductsLoaded(true);
-      });
+      axios
+        .get(import.meta.env.VITE_BACKEND_URL + "/api/product")
+        .then((res) => {
+          console.log(res.data);
+          setProducts(res.data);
+          setProductsLoaded(true);
+        });
     }
   }, [productsLoaded]);
 
@@ -86,14 +88,18 @@ export default function AdminProductsPage() {
                   <td className="px-6 py-4 text-sm text-gray-700">
                     {product.stock}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-700">
+                  <td className="px-6 py-4 text-sm text-gray-700 line-clamp-1">
                     {product.description}
                   </td>
                   <td className="px-6 py-4 text-gray-700">
                     <div className="flex justify-center items-center space-x-4">
                       <button
                         className="text-blue-500 hover:text-blue-700 transition"
-                        onClick={() => navigate(`/admin/product/editProduct`, { state: {product:product} })}
+                        onClick={() =>
+                          navigate(`/admin/product/editProduct`, {
+                            state: { product: product },
+                          })
+                        }
                       >
                         <FaPencilAlt />
                       </button>
@@ -104,7 +110,7 @@ export default function AdminProductsPage() {
                           axios
                             .delete(
                               import.meta.env.VITE_BACKEND_URL +
-                                `/product/${product.productId}`,
+                                `/api/product/${product.productId}`,
                               {
                                 headers: { Authorization: `Bearer ${token}` },
                               }

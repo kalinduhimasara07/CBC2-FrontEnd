@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("Your Email");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function login() {
     axios
@@ -23,9 +24,9 @@ function LoginPage() {
         localStorage.setItem("token", res.data.token);
         if (res.data.user.role == "admin") {
           console.log("admin");
-          window.location.href = "/admin";
+          navigate("/admin/");
         } else {
-          window.location.href = "/";
+          navigate("/");
         }
       })
       .catch((err) => {
