@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductNotFound from "./productNotfound";
 import ImageSlider from "../../components/imageSlider";
+import { addToCart } from "../../utils/cartFunction";
+import toast from "react-hot-toast";
 
 export default function ProductOverView() {
   const { id: productId } = useParams();
@@ -33,6 +35,25 @@ export default function ProductOverView() {
 
   if (status === "not-found") return <ProductNotFound />;
 
+  function handleAddToCart() {
+    // Placeholder for add to cart functionality
+    addToCart(productId, 1);
+    toast.success("Product added to cart successfully!", {
+      position: "top-right",
+      duration: 3000,
+      style: {
+        background: "#f0f4f8",
+        color: "#333",
+        fontSize: "20px",
+      },
+      iconTheme: {
+        primary: "#3b82f6",
+        secondary: "#fff",
+      },
+    });
+  }
+
+
   return (
     <div className="w-full px-4 py-6 md:px-10 lg:px-20 h-[calc(100vh-100px)] overflow-y-auto">
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
@@ -60,7 +81,7 @@ export default function ProductOverView() {
             </span>
           </div>
 
-          <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 rounded-lg shadow transition duration-300 w-fit">
+          <button onClick={handleAddToCart} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 rounded-lg shadow transition duration-300 w-fit">
             Add to Cart
           </button>
         </div>

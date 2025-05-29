@@ -4,6 +4,7 @@ import Header from "../components/header";
 import LoginPage from "./loginPage";
 import ProductOverView from "./home/productOverView";
 import ProductPage from "./home/product";
+import Cart from "./home/cart";
 
 function HomePage() {
   return (
@@ -15,6 +16,7 @@ function HomePage() {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/productInfo/:id" element={<ProductOverView />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </div>
